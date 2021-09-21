@@ -59,14 +59,14 @@ namespace ControlerForm
         }
 
         //Add Cheched item to CkechListLab
-        private void AddItemToCheckListLab()
+        private void AddItemToCheckListLab(CheckedListBox from, CheckedListBox to)
         {
             foreach (Student item in stdCheck)
             {
-                cklboxLab.Items.Add(item);
-                cklboxTrainees.Items.Remove(item);
+                to.Items.Add(item);
+                from.Items.Remove(item);
             }
-            cklboxLab.DisplayMember = "Name";
+            to.DisplayMember = "Name";
         }
 
         //Add Student To lab
@@ -82,11 +82,29 @@ namespace ControlerForm
             }
         }
 
+        //Remove Student from lab
+        private void RemoveStudentToLab()
+        {
+            //stdCheck.Remove()
+            foreach (Labs item in labs)
+            {
+                if (item.Name == cmboxLab.Text && item.students != null)
+                {
+                    foreach (Student std in item.students.ToList())
+                    {
+                        item.students.Remove(std);
+                    }
+                    
+                    break;
+                }
+            }
+        }
+
 
 
         private void btnTrnToLab_Click(object sender, EventArgs e)
         {
-            AddItemToCheckListLab();
+            AddItemToCheckListLab(cklboxTrainees,cklboxLab);
             AddStudentToLab();
 
             stdCheck = new List<Student>();
@@ -131,7 +149,7 @@ namespace ControlerForm
             }
 
 
-            AddItemToCheckListLab();
+            AddItemToCheckListLab(cklboxTrainees, cklboxLab);
             AddStudentToLab();
 
             stdCheck = new List<Student>();
@@ -140,7 +158,30 @@ namespace ControlerForm
 
         private void btnLabToTrn_Click(object sender, EventArgs e)
         {
+            AddItemToCheckListLab(cklboxLab,cklboxTrainees);
+            RemoveStudentToLab();
 
+            stdCheck = new List<Student>();
+        }
+
+        private void cklboxLab_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //stdCheck = 
+            stdCheck.Add((Student)cklboxLab.SelectedItem);
+        }
+
+        private void btnAllLabToTrn_Click(object sender, EventArgs e)
+        {
+            foreach (Student item in cklboxLab.Items)
+            {
+                stdCheck.Add(item);
+            }
+
+
+            AddItemToCheckListLab(cklboxLab, cklboxTrainees);
+            RemoveStudentToLab();
+
+            stdCheck = new List<Student>();
         }
     }
 }

@@ -66,6 +66,7 @@ namespace ControlerForm
             this.cklboxLab.Name = "cklboxLab";
             this.cklboxLab.Size = new System.Drawing.Size(251, 274);
             this.cklboxLab.TabIndex = 0;
+            this.cklboxLab.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cklboxLab_ItemCheck);
             // 
             // lblLab
             // 
@@ -128,6 +129,7 @@ namespace ControlerForm
             this.btnAllLabToTrn.TabIndex = 3;
             this.btnAllLabToTrn.Text = "<<";
             this.btnAllLabToTrn.UseVisualStyleBackColor = true;
+            this.btnAllLabToTrn.Click += new System.EventHandler(this.btnAllLabToTrn_Click);
             // 
             // Trainees
             // 
