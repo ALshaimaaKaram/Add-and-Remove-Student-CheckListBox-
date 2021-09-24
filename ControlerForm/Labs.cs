@@ -16,6 +16,7 @@ namespace ControlerForm
         //    students = new Student[size];
         //}
 
+
         public List<Student> this[string name]
         {
             get => students;

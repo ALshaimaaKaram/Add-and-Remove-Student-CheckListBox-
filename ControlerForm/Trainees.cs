@@ -124,18 +124,26 @@ namespace ControlerForm
             if (cmboxLab.SelectedIndex != -1)
             {
                 //cklboxLab.ClearSelected();
-                foreach (Labs item in labs)
-                {
-                    if (item.Name == cmboxLab.Text && item.students != null)
-                    {
-                        foreach (Student std in item.students)
-                        {
-                            cklboxLab.Items.Add(std);
-                        }
+                //foreach (Labs item in labs)
+                //{
+                //    if (item.Name == cmboxLab.Text && item.students != null)
+                //    {
+                //        foreach (Student std in item.students)
+                //        {
+                //            cklboxLab.Items.Add(std);
+                //        }
 
-                        break;
+                //        break;
+                //    }
+                //}
+
+                labs.ForEach(lab =>
+                {
+                    if (lab.Name == cmboxLab.Text && lab.students != null)
+                    {
+                        lab.students.ForEach(std => cklboxLab.Items.Add(std));
                     }
-                }
+                });
 
                 cklboxLab.DisplayMember = "Name";
             }
